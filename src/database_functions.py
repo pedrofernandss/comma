@@ -13,4 +13,13 @@ CREATE TABLE IF NOTE EXISTS articles (
 connection.commit()
 connection.close()
 
+def already_shared(article_title: str) -> bool:
+    connection = sqlite3.connect("./database/articles.db")
+    cursor = connection.cursor()
 
+    cursor.execute('SELECT 1 FROM articles WHERE title = ?', (article_title))
+    result = cursor.fetchone()
+
+    connection.close()
+
+    return result is not None
