@@ -7,7 +7,7 @@ cursor = connection.cursor()
 
 cursor.execute('''
 CREATE TABLE IF NOTE EXISTS articles (
-   id INTEGER PRIMARY KEY,
+   id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT NOT NULL            
 )
 ''')
