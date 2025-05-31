@@ -15,6 +15,22 @@ CREATE TABLE IF NOTE EXISTS articles (
 connection.commit()
 connection.close()
 
+def save_data(article_title: str) -> None:
+    """Save a new article on the database"""
+
+    try:
+        connection = sqlite3.connect("./database/articles.db")
+        cursor = connection.cursor()
+
+        cursor.execute('''
+        INSERT INTO articles (title)
+        VALUES (?)''', (article_title))
+
+        connection.commit()
+
+    except sqlite3.Error as ArticleSaveError:
+        raise ArticleSaveError
+
 def already_shared(article_title: str) -> bool:
     """Verify if the selected article was previosly shared"""
     try:
@@ -24,5 +40,5 @@ def already_shared(article_title: str) -> bool:
         result = cursor.fetchone()
 
         return result is not None
-    except sqlite3.Error as exception:
-        raise exception
+    except sqlite3.Error as ArticleCheckError:
+        raise ArticleCheckError
