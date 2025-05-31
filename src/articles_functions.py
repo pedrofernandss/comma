@@ -3,6 +3,9 @@ import string
 import requests
 from bs4 import BeautifulSoup
 
+from sources_list import sources_list
+from database_functions import save_data
+
 def select_random_source(sources_list: list) -> string:
     selected_url = random.choice(sources_list)
     
