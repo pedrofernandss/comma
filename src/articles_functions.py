@@ -4,7 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 
 from sources_list import sources_list
-from database_functions import already_shared, save_data
+from database_functions import already_shared, initialize_database, save_data
 
 def select_random_source(sources_list: list) -> string:
     selected_url = random.choice(sources_list)
@@ -35,6 +35,8 @@ def save_article_on_db(article_title: str) -> None:
     save_data(article_title)
 
 def select_article():
+    initialize_database()
+    
     source = select_random_source(sources_list)
     articles_avaiables = access_articles_on_source(source)
 
@@ -43,7 +45,6 @@ def select_article():
 
         if already_shared(article_metadata[0]):
             continue
-
+        
         save_article_on_db(article_metadata[0])
-    
-    return article_metadata
+        return article_metadata
