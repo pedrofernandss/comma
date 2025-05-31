@@ -29,7 +29,7 @@ def initialize_database() -> None:
 
 
 def save_data(article_title: str) -> None:
-    """Save a new article on the database"""
+    """Save a new data on the database"""
 
     try:
         connection = sqlite3.connect("./database/articles.db")
@@ -45,7 +45,7 @@ def save_data(article_title: str) -> None:
         raise ArticleSaveError
 
 def already_shared(article_title: str) -> bool:
-    """Verify if the selected article was previosly shared"""
+    """Verify if the selected data already is on database"""
     try:
         connection = sqlite3.connect(database_path)
         cursor = connection.cursor()
