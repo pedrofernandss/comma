@@ -16,9 +16,9 @@ def initialize_database() -> None:
         cursor = connection.cursor()
 
         cursor.execute('''
-        CREATE TABLE IF NOTE EXISTS articles (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-            title TEXT NOT NULL            
+        CREATE TABLE IF NOT EXISTS articles (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            title TEXT NOT NULL UNIQUE            
         )
         ''')
 
@@ -27,8 +27,7 @@ def initialize_database() -> None:
     except sqlite3.Error as CreationDatabaseError:
         raise CreationDatabaseError
 
-
-def save_data(article_title: str) -> None:
+def save_data(data: str) -> None:
     """Save a new data on the database"""
 
     try:
@@ -37,7 +36,7 @@ def save_data(article_title: str) -> None:
 
         cursor.execute('''
         INSERT INTO articles (title)
-        VALUES (?)''', (article_title))
+        VALUES (?)''', (data,))
 
         connection.commit()
 
@@ -49,7 +48,7 @@ def already_shared(article_title: str) -> bool:
     try:
         connection = sqlite3.connect(database_path)
         cursor = connection.cursor()
-        cursor.execute('SELECT 1 FROM articles WHERE title = ?', (article_title))
+        cursor.execute('SELECT 1 FROM articles WHERE title = ?', (article_title,))
         result = cursor.fetchone()
 
         return result is not None
