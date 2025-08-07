@@ -1,10 +1,18 @@
 sources_list = [
     "https://www.technologyreview.com/topic/artificial-intelligence/feed",
     "https://www.quantamagazine.org/computer-science/feed/",
-    "https://rss.app/feeds/WQuquvEuDFhvJ1qh.xml",
     "https://www.technologyreview.com/topic/culture/feed",
     "https://www.technologyreview.com/topic/climate-change/feed",
     "https://www.technologyreview.com/topic/culture/feed",
     "https://www.technologyreview.com/topic/business/feed",
-    "https://www.technologyreview.com/topic/computing/feed"
+    "https://www.technologyreview.com/topic/computing/feed",
+    "https://bullrich.dev/tldr-rss/ai.rss",
+    "https://bullrich.dev/tldr-rss/data.rss",
+    "https://spectrum.ieee.org/feeds/topic/artificial-intelligence.rss",
+    "https://spectrum.ieee.org/feeds/topic/climate-tech.rss",
+    "https://spectrum.ieee.org/feeds/topic/tech-history.rss",
+    "https://spectrum.ieee.org/feeds/topic/computing.rss",
+    "https://spectrum.ieee.org/feeds/topic/careers.rss",
+    "https://spectrum.ieee.org/feeds/type/feature.rss",
+    "https://spectrum.ieee.org/feeds/type/opinion.rss",
 ]
