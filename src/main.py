@@ -1,3 +1,4 @@
+import asyncio
 import os
 import discord
 from discord.ext import commands
@@ -22,18 +23,21 @@ async def send_message():
     if channel is None:
         channel = await bot.fetch_channel(channel_id)
 
-    selected_article =  select_article()
+    selected_article = select_article()
 
+    max_description_len = 1500
+    description = selected_article[1]
+    if len(description) > max_description_len:
+        description = description[:max_description_len] + '...'
     message = (
-            f"**Bora ler uma matéria para pensar um pouco fora da caixinha e ir além do código? 🤔**\n\n"
-            f"O texto de hoje é: **{selected_article[0]}**\n\n"
-            f"*{selected_article[1]}*\n\n"
-            f"🔗 Para ler o texto completo, clique [aqui]({selected_article[2]})\n\n"
-            f"Espero que você goste da sugestão! 😄"
+        f"**Bora ler uma matéria para pensar um pouco fora da caixinha e ir além do código? 🤔**\n\n"
+        f"O texto de hoje é: **{selected_article[0]}**\n\n"
+        f"*{description}*\n\n"
+        f"🔗 Para ler o texto completo, clique [aqui]({selected_article[2]})\n\n"
+        f"Espero que você goste da sugestão! 😄"
     )
 
     await channel.send(message)
     await bot.close()
 
-import asyncio
 asyncio.run(send_message())
