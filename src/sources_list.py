@@ -6,8 +6,6 @@ sources_list = [
     "https://www.technologyreview.com/topic/culture/feed",
     "https://www.technologyreview.com/topic/business/feed",
     "https://www.technologyreview.com/topic/computing/feed",
-    "https://bullrich.dev/tldr-rss/ai.rss",
-    "https://bullrich.dev/tldr-rss/data.rss",
     "https://spectrum.ieee.org/feeds/topic/artificial-intelligence.rss",
     "https://spectrum.ieee.org/feeds/topic/climate-tech.rss",
     "https://spectrum.ieee.org/feeds/topic/tech-history.rss",
