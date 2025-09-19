@@ -1,0 +1,26 @@
+{
+  "name": "byte",
+  "version": "1.0.0",
+  "description": "**Byte** is a bot that delivers a daily dose of knowledge in technology and artificial intelligence. Every day at 9 a.m., you receive a curated article designed to stimulate your critical thinking and keep you updated on the latest developments in the world of computing. It works on WhatsApp and Discord, providing information in a practical and convenient way, straight into your daily routine.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pedrofernandss/byte.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/pedrofernandss/byte/issues"
+  },
+  "homepage": "https://github.com/pedrofernandss/byte#readme",
+  "devDependencies": {
+    "@types/node": "^24.5.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2"
+  }
+}
