@@ -20,7 +20,7 @@ export async function fetchLatestArticle(url: string): Promise<Article | undefin
     return {
       title: latestItem.title,
       link: latestItem.link,
-      summary: latestItem.summary || latestItem.description || latestItem.content
+      summary: latestItem.summary || latestItem.description || latestItem.content || ''
     };
   } catch (error) {
     console.error(`Error to fetch feed from URL: ${url}`, error);
