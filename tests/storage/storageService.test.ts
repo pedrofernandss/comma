@@ -8,7 +8,11 @@ class FakeStorageService implements IStorageService { // Simula um serviço de a
   }
 
   async saveAsSent(link: string): Promise<void> {
-    this.sentLinks.push(link);
+    const alreadySent = await this.hasBeenSent(link);
+    
+    if (!alreadySent){
+      this.sentLinks.push(link);
+    }
   }
 }
 
