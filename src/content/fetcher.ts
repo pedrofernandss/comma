@@ -1,10 +1,5 @@
 import Parser from 'rss-parser';
-
-export type Article = {
-  title?: string;
-  link?: string;
-  summary?: string;
-};
+import { Article } from '@/core/types';
 
 export async function fetchLatestArticle(url: string): Promise<Article | undefined> {
   try {
