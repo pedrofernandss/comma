@@ -1,31 +1,19 @@
-import twilio from 'twilio';
+import { Article } from '@/types/types';
 
-interface Article {
-  title?: string;
-  link?: string;
-  summary?: string;
+function formatMessage(article: Article): string {
+  const body = `*Olá, eu sou o Comma* Aqui está seu artigo de hoje sobre tecnologia 🗞️
+
+*Assunto:* ${article.title || 'N/A'}
+    
+*Link:* ${article.link || 'N/A'}`;
+
+  return body;
 }
 
 export async function sendWhatsappMessage(article: Article): Promise<void> {
-  const accountSid = process.env.TWILIO_ACCOUNT_SID;
-  const authToken = process.env.TWILIO_AUTH_TOKEN;
-  const from = process.env.TWILIO_FROM_NUMBER;
-  const to = process.env.MY_PERSONAL_NUMBER;
+  
 
-  if (!accountSid || !authToken || !from || !to) {
-    console.error('Erro: As variáveis de ambiente da Twilio não estão configuradas corretamente.');
-    return;
-  }
-
-  const client = twilio(accountSid, authToken);
-
-  const body = `*Olá, eu sou o Comma* 
-
-    Aqui está seu artigo de hoje sobre tecnologia 🗞️
-
-    *Assunto:* ${article.title || 'N/A'}
-    
-    *Link:* ${article.link || 'N/A'}`;
+  const body = formatMessage(article);
 
   try {
     const message = await client.messages.create({
