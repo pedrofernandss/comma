@@ -24,9 +24,7 @@ export class MssqlStorageService implements IStorageService {
       return result.recordset[0].count > 0;
     } catch (err) {
       console.error('Database query error on hasBeenSent: ', err);
-      return True;
-    } finally {
-      await sql.close();
+      return false;
     }
   }
 
@@ -41,8 +39,6 @@ export class MssqlStorageService implements IStorageService {
       console.log(`Link saved successfully: ${link}`);
     } catch (err) {
       console.error('Database query error on saveAsSent:', err);
-    } finally {
-      await sql.close();
     }
   }
 }
