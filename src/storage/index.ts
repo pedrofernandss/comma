@@ -1,2 +1,2 @@
 export * from './storageService'; 
-export * from './MssqlStorageService';
+export * from './MsSqlStorageService';

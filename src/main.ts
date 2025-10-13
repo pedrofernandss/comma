@@ -1,6 +1,6 @@
 import * as dotenv from 'dotenv';
-import { runDailyUpdate } from './scheduler/index';
-
 dotenv.config();
+
+import { runDailyUpdate } from './scheduler/index';
 
 runDailyUpdate()
