@@ -2,9 +2,12 @@ import rssSources from './config/article_sources.json';
 import { selectRandomSource } from './content/selector';
 import { fetchLatestArticle } from './content/fetcher';
 import { sendWhatsappMessage } from './whatsapp/index';
+import { MssqlStorageService } from '@/storage';
 
 export async function runDailyUpdate() {
   try {
+    const storageService = new MssqlStorageService();
+
     const source = selectRandomSource(rssSources);
 
     if (!source) {
@@ -17,7 +20,14 @@ export async function runDailyUpdate() {
       console.log('No new article found from source. Exiting.');
     }
 
-    await sendWhatsappMessage(article!);
+    if(await storageService.hasBeenSent(article.link!)) {
+      
+    } else {
+      await storageService.saveAsSent(article.link)
+      await sendWhatsappMessage(article!);
+    }
+
+    
 
     console.log('Bot finished successfully.');
   } catch (error) {
