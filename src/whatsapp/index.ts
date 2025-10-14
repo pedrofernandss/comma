@@ -2,11 +2,15 @@ import { Article } from '@/types/types';
 import client from './twilioClient'
 
 function formatMessage(article: Article): string {
-  const body = `*Olá, eu sou o Comma* Aqui está seu artigo de hoje sobre tecnologia 🗞️
+  const body = `*Olá, eu sou o Comma* 👋
+  
+Aqui está seu artigo de hoje sobre tecnologia 🗞️
 
-*Assunto:* ${article.title || 'N/A'}
-    
-*Link:* ${article.link || 'N/A'}`;
+📰 *Assunto:* ${article.title || 'N/A'}
+
+🔗 *Link:* ${article.link || 'N/A'}
+
+O que você acha deste tema? Boa leitura!`;
 
   return body;
 }
@@ -37,3 +41,4 @@ export async function sendWhatsappMessage(article: Article): Promise<void> {
   } catch (error) {
     console.error('Error sending one or more messages via Twilio:', error);
   }
+}
