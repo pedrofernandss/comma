@@ -37,3 +37,4 @@ Thumbs.db
 coverage/
 *.tmp
 local.settings.json
+__azurite_db*
