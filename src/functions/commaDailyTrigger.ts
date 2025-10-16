@@ -6,6 +6,6 @@ async function dailyTrigger(myTimer: Timer, context: InvocationContext): Promise
 };
 
 app.timer('commaDailyTrigger', {
-    schedule: '0 9 * * *',
+    schedule: '0 30 15 * * *',
     handler: dailyTrigger
 });
