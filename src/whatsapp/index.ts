@@ -1,37 +1,27 @@
 import { Article } from '@/types/types';
-import client from './twilioClient'
-
-function formatMessage(article: Article): string {
-  const body = `*Olá, eu sou o Comma* 👋
-  
-Aqui está seu artigo de hoje sobre tecnologia 🗞️
-
-📰 *Assunto:* ${article.title || 'N/A'}
-
-🔗 *Link:* ${article.link || 'N/A'}
-
-O que você acha deste tema? Boa leitura!`;
-
-  return body;
-}
+import client from './twilioClient';
 
 export async function sendWhatsappMessage(article: Article): Promise<void> {
   const from = process.env.TWILIO_FROM_NUMBER;
   const recipientsString = process.env.RECIPIENT_NUMBERS;
+  const contentSid = process.env.TWILIO_TEMPLATE_SID;
 
-  if (!from || !recipientsString) {
-    console.error('Error: Sender or recipient numbers are not configured in .env');
+  if (!from || !recipientsString || !contentSid) {
+    console.error('Error: Missing environment variables (sender, recipients, or template SID)');
     return;
   }
 
   const recipients = recipientsString.split(',');
-  const body = formatMessage(article);
 
   const sendPromises = recipients.map((recipient) => {
     return client.messages.create({
       from: `whatsapp:${from}`,
       to: `whatsapp:${recipient}`,
-      body: body,
+      contentSid,
+      contentVariables: JSON.stringify({
+        '1': article.title || 'Sem título',
+        '2': article.link || 'Sem link',
+      }),
     });
   });
 
