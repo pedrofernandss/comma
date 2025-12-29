@@ -1,14 +1,14 @@
 package com.comma.newsbot.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "news")
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -23,6 +23,9 @@ public class News {
 
     @Column(nullable = false, length = 850, unique = true)
     private String url;
+
+    @Column(nullable = false)
+    private String description;
 
     private LocalDateTime publishedAt;
 
