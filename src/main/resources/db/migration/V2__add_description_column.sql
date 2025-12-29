@@ -1,0 +1,2 @@
+ALTER TABLE news
+ADD description NVARCHAR(MAX) NOT NULL;
