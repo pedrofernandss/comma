@@ -1,0 +1,6 @@
+CREATE TABLE available_feeds (
+   id BIGINT IDENTITY(1,1) PRIMARY KEY,
+   organization NVARCHAR(255) NOT NULL,
+   url NVARCHAR(850) NOT NULL UNIQUE,
+   is_active BIT NOT NULL DEFAULT 1
+);
