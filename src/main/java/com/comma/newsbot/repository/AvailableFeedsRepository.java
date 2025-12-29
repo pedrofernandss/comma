@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface AvailableFeedsRepository extends JpaRepository<AvailableFeeds, Long> {
-    @Query("SELECT f.url FROM FeedUrl f WHERE f.active = true")
-    List<String> findAllActiceUrls();
+    @Query("SELECT AF.url FROM AvailableFeeds AF WHERE AF.isActive = true")
+    List<String> findAllActiveUrls();
+    
 }
