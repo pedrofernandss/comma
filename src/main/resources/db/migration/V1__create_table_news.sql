@@ -1,0 +1,7 @@
+CREATE TABLE news (
+  id BIGINT IDENTITY(1,1) PRIMARY KEY,
+  title NVARCHAR(500) NOT NULL,
+  url NVARCHAR(850) NOT NULL UNIQUE,
+  published_at DATETIME2,
+  processed_at DATETIME2
+);
