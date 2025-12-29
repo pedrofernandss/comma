@@ -24,6 +24,6 @@ public class AvailableFeeds {
     @Column(nullable = false, length = 850)
     private String url;
 
-    @Column(name = "is_enabled", columnDefinition = "BIT")
-    private boolean isEnabled;
+    @Column(name = "is_active", columnDefinition = "BIT")
+    private boolean isActive;
 }
