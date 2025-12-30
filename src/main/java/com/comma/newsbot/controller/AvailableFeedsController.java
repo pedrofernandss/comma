@@ -22,4 +22,16 @@ class AvailableFeedsController {
         return repository.save(feed);
     }
 
+    @GetMapping
+    public List<AvailableFeeds> findAll(){
+        return repository.findAll();
+    }
+
+    @GetMapping("/active-urls")
+    public List<String> findAllActiveUrls(){
+        return repository.findAllActiveUrls();
+    }
+
+
+
 }
