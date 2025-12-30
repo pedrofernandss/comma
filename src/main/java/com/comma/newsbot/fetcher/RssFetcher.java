@@ -17,7 +17,7 @@ import java.util.List;
 @Component
 public class RssFetcher {
 
-    public News fetchNews(String url){
+    public List<News> fetchNews(String url){
         List<News> newsList = new ArrayList<>();
 
         try {
@@ -39,5 +39,20 @@ public class RssFetcher {
         } catch (Exception e){
             log.error("Failed to fetch RSS from {}: {}", url, e.getMessage());
         }
+        return newsList;
     }
+
+    private String extractDescription(SyndEntry entry) {
+        if (entry.getContents() != null && !entry.getContents().isEmpty()) {
+            return entry.getContents().get(0).getValue();
+        }
+
+        if (entry.getDescription() != null) {
+            return entry.getDescription().getValue();
+        }
+
+        log.warn("No description, content or summary found for entry: {}", entry.getTitle());
+        return "No description available";
+    }
+
 }
