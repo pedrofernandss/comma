@@ -1,5 +1,6 @@
 package com.comma.newsbot.service;
 
+import com.comma.newsbot.fetcher.RssFetcher;
 import com.comma.newsbot.repository.AvailableFeedsRepository;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +12,11 @@ public class NewsService {
 
     private final AvailableFeedsRepository feedsRepository;
     private final Random random = new Random();
+    private final RssFetcher rssFetcher;
 
-    public NewsService(AvailableFeedsRepository feedsRepository){
+    public NewsService(AvailableFeedsRepository feedsRepository, RssFetcher rssFetcher){
         this.feedsRepository = feedsRepository;
+        this.rssFetcher = rssFetcher;
     }
 
     public void getRandomFeedUrl(){
@@ -28,5 +31,9 @@ public class NewsService {
         String selectedUrl = activeUrls.get(idx);
 
         System.out.println("URL Sorteada: " + selectedUrl);
+
+        rssFetcher.fetch(selectedUrl);
     }
+
+
 }
