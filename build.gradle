@@ -35,6 +35,8 @@ dependencies {
 	implementation 'org.flywaydb:flyway-sqlserver'
 	implementation 'com.rometools:rome:2.1.0'
 	testImplementation 'com.h2database:h2'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+	implementation 'org.springframework.boot:spring-boot-starter-web'
 }
 
 tasks.named('test') {
