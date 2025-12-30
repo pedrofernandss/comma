@@ -32,6 +32,24 @@ class AvailableFeedsController {
         return repository.findAllActiveUrls();
     }
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<AvailableFeeds> updatePartial(@PathVariable Long id, @RequestBody AvailableFeeds feedDetails) {
+        return repository.findById(id)
+                .map(feed -> {
+                    if (feedDetails.getOrganization() != null) {
+                        feed.setOrganization(feedDetails.getOrganization());
+                    }
+                    if (feedDetails.getUrl() != null) {
+                        feed.setUrl(feedDetails.getUrl());
+                    }
+
+                    feed.setActive(feedDetails.isActive());
+
+                    return ResponseEntity.ok(repository.save(feed));
+                })
+                .orElse(ResponseEntity.notFound().build());
+    }
+
 
 
 }
