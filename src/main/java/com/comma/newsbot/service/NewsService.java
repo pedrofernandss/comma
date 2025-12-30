@@ -2,12 +2,14 @@ package com.comma.newsbot.service;
 
 import com.comma.newsbot.fetcher.RssFetcher;
 import com.comma.newsbot.repository.AvailableFeedsRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Random;
 
 @Service
+@Slf4j
 public class NewsService {
 
     private final AvailableFeedsRepository feedsRepository;
@@ -19,21 +21,28 @@ public class NewsService {
         this.rssFetcher = rssFetcher;
     }
 
-    public void getRandomFeedUrl(){
-        List<String> activeUrls = feedsRepository.findAllActiveUrls();
+    public void execute(){
+        String url = pickRandomUrl();
+        if(url == null){
+            log.warn("No active feed URLs found in database.");
+        }
 
+        try {
+            rssFetcher.fetch(url);
+        } catch (Exception e) {
+            log.error("Failed to process RSS feed for URL: {}", url, e);
+        }
+    }
+
+    private String pickRandomUrl(){
+        List<String> activeUrls = feedsRepository.findAllActiveUrls();
         if(activeUrls.isEmpty()){
-            System.out.println("Nenhum feed ativo foi encontrado!");
-            return;
+            return null;
         }
 
         int idx = random.nextInt(activeUrls.size());
-        String selectedUrl = activeUrls.get(idx);
 
-        System.out.println("URL Sorteada: " + selectedUrl);
-
-        rssFetcher.fetch(selectedUrl);
+        return activeUrls.get(idx);
     }
-
 
 }
