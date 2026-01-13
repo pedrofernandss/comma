@@ -22,7 +22,8 @@ class AvailableFeedsRepositoryTest {
 
     @Test
     void shouldReturnOnlyActiveUrls() {
-        AvailableFeeds activeFeed = AvailableFeeds.builder()
+        AvailableFeeds activeFeed;
+        activeFeed = AvailableFeeds.builder()
                 .organization("G1")
                 .url("https://g1.com/rss")
                 .isActive(true)
