@@ -1,7 +1,9 @@
 package com.comma.newsbot.service;
 
+import com.comma.newsbot.domain.News;
 import com.comma.newsbot.fetcher.RssFetcher;
 import com.comma.newsbot.repository.AvailableFeedsRepository;
+import com.comma.newsbot.repository.NewsRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -13,25 +15,32 @@ import java.util.Random;
 public class NewsService {
 
     private final AvailableFeedsRepository feedsRepository;
+    private final NewsRepository newsRepository;
     private final Random random = new Random();
     private final RssFetcher rssFetcher;
 
-    public NewsService(AvailableFeedsRepository feedsRepository, RssFetcher rssFetcher){
+    public NewsService(AvailableFeedsRepository feedsRepository, NewsRepository newsRepository, RssFetcher rssFetcher){
         this.feedsRepository = feedsRepository;
+        this.newsRepository = newsRepository;
         this.rssFetcher = rssFetcher;
     }
 
-    public void execute(){
-        String url = pickRandomUrl();
-        if(url == null){
-            log.warn("No active feed URLs found in database.");
-        }
-
+    public News chooseNews(){
         try {
-            rssFetcher.fetch(url);
-        } catch (Exception e) {
-            log.error("Failed to process RSS feed for URL: {}", url, e);
+            String url = pickRandomUrl();
+            List<News> listNews = rssFetcher.fetchNews(url);
+
+            for(News news : listNews){
+                if(!newsRepository.existsByUrl(news.getUrl())){
+                    newsRepository.save(news);
+                    return news;
+                }
+            }
+            log.info("There isn't a new news available in this source.");
+        } catch(Exception e){
+            log.error("Failed to choose news ", e);
         }
+        return null;
     }
 
     private String pickRandomUrl(){
