@@ -17,7 +17,7 @@ public class NewsController {
 
     @PostMapping("/trigger")
     public String trigger(){
-        newsService.getRandomFeedUrl();
+        newsService.chooseNews();
         return "Sorteio executado! Verifique o console do IntelliJ.";
     }
 }
