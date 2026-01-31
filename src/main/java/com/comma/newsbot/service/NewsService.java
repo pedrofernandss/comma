@@ -5,6 +5,7 @@ import com.comma.newsbot.fetcher.RssFetcher;
 import com.comma.newsbot.repository.AvailableFeedsRepository;
 import com.comma.newsbot.repository.NewsRepository;
 import com.comma.newsbot.service.channel.Discord;
+import com.comma.newsbot.service.llm.Groq;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -20,13 +21,15 @@ public class NewsService {
     private final NewsRepository newsRepository;
     private final Random random = new Random();
     private final RssFetcher rssFetcher;
+    private final Groq chatModel;
 
     public NewsService(AvailableFeedsRepository feedsRepository, Discord discord,
-                       NewsRepository newsRepository, RssFetcher rssFetcher){
+                       NewsRepository newsRepository, RssFetcher rssFetcher, Groq chatModel){
         this.feedsRepository = feedsRepository;
         this.discord = discord;
         this.newsRepository = newsRepository;
         this.rssFetcher = rssFetcher;
+        this.chatModel = chatModel;
     }
 
     public News chooseNews(){
@@ -36,6 +39,7 @@ public class NewsService {
 
             for(News news : listNews){
                 if(!newsRepository.existsByUrl(news.getUrl())){
+                    news.setDescription(summarizeNews(news.getDescription()));
                     discord.sendMessage(news);
                     newsRepository.save(news);
                     return news;
@@ -57,6 +61,12 @@ public class NewsService {
         int idx = random.nextInt(activeUrls.size());
 
         return activeUrls.get(idx);
+    }
+
+    private String summarizeNews(String content){
+
+        return chatModel.summarizeNews(content);
+
     }
 
 }
