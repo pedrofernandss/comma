@@ -36,6 +36,7 @@ dependencies {
 	testImplementation 'com.h2database:h2'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.ai:spring-ai-starter-model-openai'
 }
 
 tasks.named('test') {
