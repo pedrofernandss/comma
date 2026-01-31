@@ -47,12 +47,8 @@ public class RssFetcher {
             return entry.getContents().get(0).getValue();
         }
 
-        if (entry.getDescription() != null) {
-            return entry.getDescription().getValue();
-        }
-
-        log.warn("No description, content or summary found for entry: {}", entry.getTitle());
-        return "No description available";
+        log.warn("No content found for entry: {}", entry.getTitle());
+        return "No content available";
     }
 
 }
