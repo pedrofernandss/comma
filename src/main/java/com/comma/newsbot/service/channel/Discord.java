@@ -5,7 +5,6 @@ import com.comma.newsbot.formatter.MessageFormatter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -52,7 +51,7 @@ public class Discord implements Channel {
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
             if (response.statusCode() == 204) {
-                System.out.println("News sended to discorddd channel: " + news.getTitle());
+                System.out.println("News sended to discord channel: " + news.getTitle());
             } else {
                 System.err.println("Discord error (" + response.statusCode() + "): " + response.body());
             }
