@@ -10,7 +10,7 @@ Never a period, always a comma.
 
 ---
 
-## 🎯 About The Project
+## About The Project
 
 In the midst of an overwhelming volume of newsletters, blogs, and news, and other countless sources staying up-to-date in the tech industry is a challenge. This project was born to solve this problem by delivering each day one carefully selected piece directly to the user, ensuring relevance without overwhelming volume.
 
@@ -35,6 +35,6 @@ The initial version failed due to low adoption, teaching a valuable lesson about
 * **Cloud:** Azure
 * **Integration:** Discord, WhatsApp (Twilio)
 
-## 🔮 Next Steps
+## Next Steps
 * Implement a CI/CD pipeline with GitHub Actions to automate deployments
 * Expand observability with LangSmith for prompt debugging and evaluation
