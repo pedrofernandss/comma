@@ -23,4 +23,4 @@ Guidelines:
 
 Remember, use the exact same number of words for each summary.
 
-Answer in JSON. The JSON should be a list (length 5) of dictionaries whose keys are "Missing_Entities" and "Denser_Summary".
+Answer the one resultant summary. They should contain all the information necessary for the reader to understand the news.
