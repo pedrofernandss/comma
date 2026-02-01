@@ -38,6 +38,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation "org.springframework.ai:spring-ai-starter-model-openai:1.1.0-M1"
+	implementation("com.langchain.smith:langsmith-java:0.1.0-alpha.22")
 }
 
 tasks.named('test') {
