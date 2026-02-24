@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 _llm = GroqLLM()
 
 
-def choose_news(db: Session):
+def choose_news(db: Session, chat_id: str = None):
     try:
         active_urls = feeds_repo.find_all_active_urls(db)
         if not active_urls:
@@ -25,11 +25,12 @@ def choose_news(db: Session):
             if not news_repo.exists_by_url(db, news.url):
                 news.description = _llm.summarize_news(news.description)
                 news_repo.save(db, news)
-                print(f"\n=== NEWS FOUND ===")
-                print(f"Title: {news.title}")
-                print(f"URL: {news.url}")
-                print(f"Description: {news.description}")
-                print(f"==================\n")
+
+                if chat_id:
+                    from src.service.channel.telegram import Telegram
+
+                    Telegram().send_message(news, chat_id)
+
                 return news
 
         logger.info("No new articles found in this source.")

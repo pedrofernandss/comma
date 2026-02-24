@@ -1,5 +1,7 @@
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Depends
+from sqlalchemy.orm import Session
 
+from src.database import get_session
 from src.service.channel.telegram import Telegram
 
 telegram_router = APIRouter(prefix="/api/telegram")
@@ -14,6 +16,6 @@ def get_telegram() -> Telegram:
 
 
 @telegram_router.post("/webhook")
-def webhook(request: Request, update: dict):
-    get_telegram().handle_update(update)
+def webhook(update: dict, db: Session = Depends(get_session)):
+    get_telegram().handle_update(update, db)
     return {"status": "ok"}
