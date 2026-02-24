@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
+
 from src.database import get_session
 from src.service.news_service import choose_news
 

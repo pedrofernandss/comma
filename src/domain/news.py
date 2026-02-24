@@ -1,6 +1,8 @@
-from sqlalchemy import Column, BigInteger, String, DateTime
-from src.database import Base
 from datetime import datetime
+
+from sqlalchemy import Column, BigInteger, String, DateTime
+
+from src.database import Base
 
 
 class News(Base):

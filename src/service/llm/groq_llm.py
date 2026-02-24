@@ -1,6 +1,7 @@
-import logging
 import os
+import logging
 from pathlib import Path
+
 from openai import OpenAI
 
 logger = logging.getLogger(__name__)
@@ -20,7 +21,7 @@ class GroqLLM:
     def summarize_news(self, content: str) -> str:
         try:
             response = self.client.chat.completions.create(
-                model="llama-3.3-70b-versatile",
+                model="openai/gpt-oss-120b",
                 messages=[
                     {"role": "system", "content": self.system_prompt},
                     {"role": "user", "content": content},

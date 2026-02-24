@@ -1,6 +1,7 @@
-import logging
 import os
+import logging
 import requests
+
 from src.domain.news import News
 from src.formatter.message_formatter import format_news_to_message
 

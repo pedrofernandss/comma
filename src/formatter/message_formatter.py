@@ -1,6 +1,6 @@
 from src.domain.news import News
 
-MAX_DESCRIPTION_LENGTH = 1000
+MAX_DESCRIPTION_LENGTH = 1500
 
 
 def format_news_to_message(news: News) -> str:

@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
+
 from src.database import get_session
 from src.domain.available_feeds import AvailableFeeds
 import src.repository.available_feeds_repository as feeds_repo
