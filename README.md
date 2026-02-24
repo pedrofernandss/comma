@@ -23,18 +23,17 @@ The initial version failed due to low adoption, teaching a valuable lesson about
 * Daily, automatic execution via a Timer Trigger.
 * Random selection of news sources from a configuration file.
 * Database connection to prevent sending duplicate articles.
-* Sends messages across multiple platforms such as WhatsApp (Twilio), Discord, and Telegram.
+* Sends messages across multiple platforms.
 * "Retry loop" logic to ensure a new article is found.
 
 ## Tech Stack
 
-* **Language:** Java
-* **Frameworks:** Spring, and Spring AI
+* **Language:** Python
+* **Frameworks:** FastAPI
 * **AI/LLM:** Groq
-* **Build & Deploy:** Gradle, Docker
+* **Build & Deploy:** Uvicorn, Docker
 * **Cloud:** Azure
-* **Integration:** Discord, WhatsApp (Twilio)
+* **Integration:** Telegram
 
 ## Next Steps
 * Implement a CI/CD pipeline with GitHub Actions to automate deployments
-* Expand observability with LangSmith for prompt debugging and evaluation
