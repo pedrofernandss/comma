@@ -1,8 +1,8 @@
 import os
 import logging
 from pathlib import Path
-
 from openai import OpenAI
+from langsmith import traceable
 
 logger = logging.getLogger(__name__)
 
@@ -18,6 +18,7 @@ class GroqLLM:
         )
         self.system_prompt = PROMPT_PATH.read_text(encoding="utf-8")
 
+    @traceable(name="summarize_news")
     def summarize_news(self, content: str) -> str:
         try:
             response = self.client.chat.completions.create(
